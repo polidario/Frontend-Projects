@@ -1,0 +1,154 @@
+:root {
+    /** Font **/
+    --font-family: 'Roboto', sans-serif;
+
+    /** Colors **/
+    --primary-color: #166534;
+    --secondary-color: #4d7c0f;
+    --background-color: #f0f0f0;
+    --background-dark: #000;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+body {
+    background-color: var(--background-color);
+    font-family: var(--font-family);
+}
+
+main {
+    width: 60%;
+    margin: auto;
+}
+
+footer {
+    font-size: 1rem;
+    text-align: center;
+    margin-top: 2rem;
+    color: white;
+    background-color: var(--background-dark);
+    padding: 1rem;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+footer p {
+    margin: 0;
+}
+
+footer p a {
+    color: white;
+    text-decoration: underline;
+}
+
+.message {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1rem;
+    font-size: 1.2rem;
+    display: none;
+    margin-top: 2rem;
+}
+
+.players {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 20px auto;
+}
+
+.player {
+    width: 200px;
+    height: 200px;
+
+    border: 1px solid var(--primary-color);
+    display: inline-block;
+    text-align: center;
+    padding: 20px;
+    margin: 0 20px;
+    border-radius: 10px;
+}
+
+.player .name {
+    font-weight: 700;
+}
+
+.player .score {
+    font-size: 2rem;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    width: fit-content;
+    margin: 0 auto;
+    margin-top: 50px;
+    
+}
+
+.grid .cell {
+    border: 1px solid var(--primary-color);
+    text-align: center;
+    font-size: 50px;
+    padding: 20px;
+    width: 100px;
+    height: 100px;
+    max-width: 120px;
+    max-height: 120px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.grid .cell:hover {
+    background-color: var(--primary-color);
+    color: white;
+    cursor: pointer;
+}
+
+.grid .cell:disabled {
+    background-color: var(--secondary-color);
+    cursor: not-allowed;
+}
+
+@media screen and (max-width: 768px) {
+    main {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .grid {
+        margin-top: 20px;
+        width: 100%;
+    }
+
+    .grid .cell {
+        width: 100%;
+        max-width: 100%;
+        height: 150px;
+    }
+
+    .player {
+        width: 100%;
+        height: 150px;
+    }
+
+    .player .score {
+        font-size: 1.5rem;
+    }
+
+    .message {
+        font-size: 1rem;
+    }
+
+    .players {
+        margin: 10px auto;
+    }
+}
