@@ -23,6 +23,9 @@ class TicTacToe {
     constructor() {
         this.cells = document.querySelectorAll('.cell');
         this.messageBox = document.querySelector('.message');
+        this.messageModal = document.querySelector('#message_modal');
+        this.playAgainBtn = document.querySelector('#message_modal_button');
+        this.modalCloseBtn = document.querySelector('#message_modal_close');
         this.playersStick = ['X', 'O'];
         this.currentPlayer = 0;
         this.end = false;
@@ -33,6 +36,16 @@ class TicTacToe {
     init() {
         this.cells.forEach(cell => {
             cell.addEventListener('click', this.handleCellClick.bind(this));
+        });
+
+        this.playAgainBtn.addEventListener('click', () => {
+            window.location.reload();
+        });
+
+        this.modalCloseBtn.addEventListener('click', () => {
+            this.messageModal.style.visibility = 'hidden';
+            this.messageModal.style.opacity = '0';
+            this.messageModal.style.pointerEvents = 'none';
         });
     }
 
@@ -55,9 +68,9 @@ class TicTacToe {
             this.currentPlayer = (this.currentPlayer + 1) % this.playersStick.length;
         } else {
             if (this.winner === false) {
-                this.showMsg('Game ended: No winner!');
+                this.showMsg('Game ended: No winner!', 'gameover');
             } else {
-                this.showMsg(`Game ended: ${this.playersStick[this.winner]} win !`);
+                this.showMsg(`Game ended: ${this.playersStick[this.winner]} win !`, 'gameover');
             }
         }
     }
@@ -99,9 +112,15 @@ class TicTacToe {
     }
       
 
-    showMsg(msg) {
-        this.messageBox.innerHTML = msg;
-        this.messageBox.style.display = 'block';
+    showMsg(msg, type = 'info') {
+        if(type === 'info') {
+            this.messageBox.innerHTML = msg;
+            this.messageBox.style.display = 'block';
+        } else {
+            this.messageModal.style.visibility = 'visible';
+            this.messageModal.style.opacity = '1';
+            this.messageModal.style.pointerEvents = 'auto';
+        }
     }
 
     hideMsg() {
