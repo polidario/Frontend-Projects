@@ -19,6 +19,29 @@ const winningCombinations = [
     [2, 4, 6],
 ];
 
+class Player {
+    constructor(name, score) {
+        this.name = name;
+        this.score = score;
+    }
+
+    getName() {
+        return this.name;
+    }
+
+    setName(name) {
+        this.name = name;
+    }
+
+    getScore() {
+        return this.score;
+    }
+
+    setScore() {
+        this.score = score;
+    }
+}
+
 class TicTacToe {
     constructor() {
         this.cells = document.querySelectorAll('.cell');
@@ -95,8 +118,6 @@ class TicTacToe {
                 break;
             }
         }
-
-        console.log(this.winner);
       
         if (!this.winner && !isWon) {
             let emptyCellFound = false;

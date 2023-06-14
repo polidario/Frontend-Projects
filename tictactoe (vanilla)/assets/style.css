@@ -3,10 +3,11 @@
     --font-family: 'Roboto', sans-serif;
 
     /** Colors **/
-    --primary-color: #166534;
-    --secondary-color: #4d7c0f;
+    --primary-color: #94bbe9;
+    --secondary-color: #1e4bac;
     --background-color: #f0f0f0;
     --background-dark: #000;
+    --oprimary-color: #94bce982;
 }
 
 * {
@@ -24,6 +25,13 @@ body {
 main {
     width: 60%;
     margin: auto;
+    z-index: 99;
+}
+
+.gradient {
+    background: rgb(238,174,202);
+    background: linear-gradient(90deg, #eeaeca 0%, #94bbe9 100%);
+
 }
 
 footer {
@@ -67,8 +75,8 @@ footer p a {
 .player {
     width: 200px;
     height: 200px;
-
-    border: 1px solid var(--primary-color);
+    background-color: var(--background-color);
+    border: 3px solid var(--primary-color);
     display: inline-block;
     text-align: center;
     padding: 20px;
@@ -77,10 +85,13 @@ footer p a {
 }
 
 .player .name {
+    display: block;
+    padding: 10px;
     font-weight: 700;
 }
 
 .player .score {
+    display: block;
     font-size: 2rem;
 }
 
@@ -95,7 +106,8 @@ footer p a {
 }
 
 .grid .cell {
-    border: 1px solid var(--primary-color);
+    background-color: var(--background-color);
+    border: 2px solid var(--primary-color);
     text-align: center;
     font-size: 50px;
     padding: 20px;
@@ -105,10 +117,11 @@ footer p a {
     max-height: 120px;
     cursor: pointer;
     border-radius: 10px;
+    box-shadow: 0 0 15px #1a1a1a30;
 }
 
 .grid .cell:hover {
-    background-color: var(--primary-color);
+    background-color: var(--oprimary-color);
     color: white;
     cursor: pointer;
 }
