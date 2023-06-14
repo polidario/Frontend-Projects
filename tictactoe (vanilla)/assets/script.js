@@ -24,6 +24,7 @@ class TicTacToe {
         this.cells = document.querySelectorAll('.cell');
         this.messageBox = document.querySelector('.message');
         this.messageModal = document.querySelector('#message_modal');
+        this.messageModalText = document.querySelector('#message_modal_text');
         this.playAgainBtn = document.querySelector('#message_modal_button');
         this.modalCloseBtn = document.querySelector('#message_modal_close');
         this.playersStick = ['X', 'O'];
@@ -50,7 +51,10 @@ class TicTacToe {
     }
 
     handleCellClick(e) {
-        if (this.end) return;
+        if (this.end) {
+            this.showMsg(`Game is already over: ${this.playersStick[this.winner]} win !`, 'gameover');
+            return;
+        }
 
         const curCell = e.target;
 
@@ -114,9 +118,10 @@ class TicTacToe {
 
     showMsg(msg, type = 'info') {
         if(type === 'info') {
-            this.messageBox.innerHTML = msg;
+            this.messageBox.textContent = msg;
             this.messageBox.style.display = 'block';
         } else {
+            this.messageModalText.textContent = msg;
             this.messageModal.style.visibility = 'visible';
             this.messageModal.style.opacity = '1';
             this.messageModal.style.pointerEvents = 'auto';
@@ -124,7 +129,7 @@ class TicTacToe {
     }
 
     hideMsg() {
-        this.messageBox.innerHTML = '';
+        this.messageBox.textContent = '';
         this.messageBox.style.display = 'none';
     }
 }
