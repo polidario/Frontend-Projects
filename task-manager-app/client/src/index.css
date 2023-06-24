@@ -27,7 +27,8 @@ body {
     padding: 0 1rem;
 }
 
-.ListHeader button {
+.ListHeader button,
+.ListItem .button-container button {
     background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -39,4 +40,56 @@ body {
 .ListHeader button:hover {
     border-color: #999;
     background-color: #f0f0f0;
+}
+
+.ListItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid #ccc;
+}
+
+.ListItem:last-child {
+    border-bottom: none;
+}
+
+.ListItem .item-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.ListItem .title {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.ListItem .description {
+    font-size: 1rem;
+    color: #666;
+}
+
+.ListItem .button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.icon {
+    font-size: 1.5rem;
+    color: #ccc;
+    cursor: pointer;
+    width: 1.5rem;
+}
+
+.icon {
+    color: #00c853;
+}
+
+.icon:hover {
+    color: #00e676;
 }

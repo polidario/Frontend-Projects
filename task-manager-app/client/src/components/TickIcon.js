@@ -1,7 +1,9 @@
+import { CheckCircleIcon } from '@heroicons/react/24/solid';
+
 export default function TickIcon() {
     return (
         <div className="TickIcon">
-            <h1>TickIcon</h1>
+            <CheckCircleIcon className="icon" />
         </div>
     );
 }

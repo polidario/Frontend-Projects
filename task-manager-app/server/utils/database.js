@@ -10,13 +10,16 @@ const pool = new Pool({
     port: config.PORT,
     password: config.PASSWORD
 });
+/**
+ * Uncomment the following lines to test the connection to the database
+ */
 
-pool.on('connect', () => {
-    console.log('connected to the db');
-});
+// pool.on('connect', () => {
+//     console.log('connected to the db');
+// });
 
-pool.on('error', (err) => {
-    console.log(err);
-});
+// pool.on('error', (err) => {
+//     console.log(err);
+// });
 
 module.exports = pool
