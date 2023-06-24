@@ -1,7 +1,7 @@
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import { useState, useEffect } from "react";
 
-export default function Modal({ mode }) {
+export default function Modal({ mode, setIsModalOpen }) {
     const [isEdit, setIsEdit] = useState(false);
 
     const [data, setData] = useState({
@@ -18,26 +18,65 @@ export default function Modal({ mode }) {
         }
     }, [mode]);
 
+    const handleChange = (e) => {
+        e.preventDefault();
+        setData({
+            ...data,
+            [e.target.name]: e.target.value,
+        });
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(data);
+    }
+
     return (
         <div className="Modal">
             <div className="modal-container">
                 <div className="modal-header">
                     <h2 className="modal-title">{isEdit ? "Edit task" : "Create a new task"}</h2>
-                    <XMarkIcon className="icon" />
+                    <XMarkIcon className="icon" onClick={() => setIsModalOpen(false)} />
+                </div>
+
+                <div className="modal-content">
+                    <form className="modal-form" onSubmit={handleSubmit}>
+                        <label htmlFor="title" className="form-label">Title</label>
+                        <input 
+                            onChange={(e) => handleChange(e)}
+                            value={data.title}
+                            type="text" 
+                            id="title" 
+                            name="title" 
+                            className="form-input" 
+                            required />
+
+                        <label htmlFor="description" className="form-label">Description</label>
+                        <input 
+                            onChange={(e) => handleChange(e)}
+                            value={data.description}
+                            type="text" 
+                            id="description" 
+                            name="description" 
+                            className="form-input" 
+                            required />
+
+                        <label htmlFor="urgency" className="form-label">Urgency</label>
+                        <input 
+                            onChange={(e) => handleChange(e)}
+                            value={data.urgency}
+                            type="range" 
+                            id="urgency" 
+                            name="urgency" 
+                            min="1" max="5"
+                            className="form-input" 
+                            required/>
+
+                        <button type="submit">Add task</button>
+                    </form>
                 </div>
                 
-                <form className="modal-form">
-                    <label htmlFor="title" className="form-label">Title</label>
-                    <input type="text" id="title" name="title" className="form-input" required />
-
-                    <label htmlFor="description" className="form-label">Description</label>
-                    <input type="text" id="description" name="description" className="form-input" required/>
-
-                    <label htmlFor="urgency" className="form-label">Urgency</label>
-                    <input type="range" id="urgency" name="urgency" min="1" max="5" defaultValue="1" className="form-input" required/>
-
-                    <button type="submit">Add task</button>
-                </form>
+                
             </div>
         </div>
     )
