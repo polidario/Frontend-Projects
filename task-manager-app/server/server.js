@@ -9,7 +9,7 @@ const app = express()
 const PORT = process.env.PORT || 54321;
 
 const corsConfig = {
-    origin: 'http://localhost:3001',
+    origin: 'http://localhost:3000',
 }
 
 app.use(cors(corsConfig));
@@ -30,6 +30,36 @@ app.get('/tasks/:user', (req, res) => {
     }
 });
 
+app.post("/tasks" , async(req,res) => {
+    const { username, title, urgency, date } = req.body
+  
+    try {
+        const id = uuidv4();
+        const newTask = await pool.query(
+            "INSERT INTO tasks (username, title, urgency, date) VALUES ($1, $2, $3, $4) RETURNING *", 
+            [username, title, urgency, date]
+        );
+        res.json(newTask.rows[0]);
+    } catch (err) {
+      console.error(err.message)
+    }
+});
+
+app.put("/tasks/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { user_email, title, urgency, date } = req.body;
+
+        await pool.query(
+            "UPDATE tasks SET username = $1, title = $2, urgency = $3, date = $4 WHERE id = $5",
+            [user_email, title, urgency, date, id]
+        );
+
+        res.json("Task was updated!");
+    } catch (err) {
+        console.error(err.message);
+    }
+});
 app.get('/', (req, res) => {
     res.send('Hello World!')
 })
