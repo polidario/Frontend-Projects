@@ -1,5 +1,5 @@
-import ListHeader from "./components/ListHeader";
 import ListItem from "./components/ListItem";
+import Navigation from "./components/Navigation";
 import ProgressBar from "./components/ProgressBar";
 import { getData } from "./services/taskApi";
 import { useEffect, useState } from "react";
@@ -18,7 +18,7 @@ function App() {
 	};
 
 	useEffect(() => {
-		setInterval(() => setCompleted(Math.floor(Math.random() * 100) + 1), 100);
+		setInterval(() => setCompleted(Math.floor(Math.random() * 100) + 1), 1000);
 		fetchTasks();
 	}, []);
 
@@ -27,15 +27,25 @@ function App() {
 	});
 		
 	return (
-		<div className="App">
-			<ListHeader />
-			{isLoading && <ProgressBar progress={completed}/>}
-			{sortedTasks.map((task) => {
-				return (
-					<ListItem key={task.id} id={task.id} title={task.title} description={task.description} />
-				);
-			})}
-		</div>
+		<>
+			<div className='main'>
+				<div className='gradient'/>
+			</div>
+
+			<main className="app">
+				<Navigation />
+				{isLoading && <ProgressBar progress={completed}/>}
+				<div className="container">
+					{sortedTasks.map((task) => {
+						return (
+							<ListItem key={task.id} id={task.id} title={task.title} description={task.description} />
+						);
+					})}
+				</div>
+				
+			</main>
+		</>
+		
 	);
 }
 
