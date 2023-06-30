@@ -1,11 +1,12 @@
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import { useState, useEffect } from "react";
+import { postData, updateData } from "../services/taskApi";
 
 export default function Modal({ mode, setIsModalOpen }) {
     const [isEdit, setIsEdit] = useState(false);
 
     const [data, setData] = useState({
-        username: "",
+        username: "helloworld",
         title: "",
         description: "",
         urgency: 1,
@@ -26,8 +27,17 @@ export default function Modal({ mode, setIsModalOpen }) {
         });
     }
 
+    const submitUpdate = (data) => {
+        updateData(data.id, data);
+    }
+
+    const submitCreate = (data) => {
+        postData(data);
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
+        isEdit ? submitUpdate(data) : submitCreate(data);
         console.log(data);
     }
 
