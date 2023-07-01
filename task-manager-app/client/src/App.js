@@ -1,4 +1,5 @@
 import ListItem from "./components/ListItem";
+import Modal from "./components/Modal";
 import Navigation from "./components/Navigation";
 import ProgressBar from "./components/ProgressBar";
 import { getData } from "./services/taskApi";
@@ -8,10 +9,18 @@ function App() {
 	const username = "example";
 	const [completed, setCompleted] = useState(0);
 	const [isLoading, setIsLoading] = useState(true);
+	const [isModalOpen, setIsModalOpen] = useState(false);
+
 	const [tasks, setTasks] = useState([]);
+	const [selectedTask, setSelectedTask] = useState(null);
+
+	const openModal = (task) => {
+		setSelectedTask(task);
+		setIsModalOpen(true);
+	};
 
 	const fetchTasks = async () => {
-		await getData(username).then((res) => {
+		await getData().then((res) => {
 			setTasks(res);
 			setIsLoading(false);
 		});
@@ -38,11 +47,11 @@ function App() {
 				<div className="container">
 					{sortedTasks.map((task) => {
 						return (
-							<ListItem key={task.id} id={task.id} title={task.title} description={task.description} />
+							<ListItem key={task.id} task={task} fetchTasks={fetchTasks} openModal={openModal} />
 						);
 					})}
 				</div>
-				
+				{isModalOpen && (<Modal setIsModalOpen={setIsModalOpen} mode={'edit'} task={selectedTask} fetchTasks={fetchTasks} />)}
 			</main>
 		</>
 		

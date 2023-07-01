@@ -2,15 +2,15 @@ import { XMarkIcon } from "@heroicons/react/24/solid";
 import { useState, useEffect } from "react";
 import { postData, updateData } from "../services/taskApi";
 
-export default function Modal({ mode, setIsModalOpen }) {
-    const [isEdit, setIsEdit] = useState(false);
+export default function Modal({ task, mode, setIsModalOpen, fetchTasks }) {
+    const [isEdit, setIsEdit] = useState(mode === "edit" ? true : false);
 
     const [data, setData] = useState({
-        username: "helloworld",
-        title: "",
-        description: "",
-        urgency: 1,
-        date: isEdit ? "" : new Date().toISOString().slice(0, 10),
+        username: isEdit ? task.username : "example",
+        title: isEdit ? task.title : "",
+        description: isEdit ? task.description : "",
+        urgency: isEdit ? task.urgency : 1,
+        date: isEdit ? task.date : new Date().toISOString().slice(0, 10),
     });
 
     useEffect(() => {
@@ -21,24 +21,39 @@ export default function Modal({ mode, setIsModalOpen }) {
 
     const handleChange = (e) => {
         e.preventDefault();
+        const { name, value } = e.target;
+
         setData({
             ...data,
-            [e.target.name]: e.target.value,
+            [name]: value,
         });
     }
 
-    const submitUpdate = (data) => {
-        updateData(data.id, data);
+    const submitUpdate = (id, data) => {
+        try {
+            updateData(id, data).then(() => {
+                fetchTasks();
+                setIsModalOpen(false);
+            });
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     const submitCreate = (data) => {
-        postData(data);
+        try {
+            postData(data).then(() => {
+                fetchTasks();
+                setIsModalOpen(false);
+            });
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        isEdit ? submitUpdate(data) : submitCreate(data);
-        console.log(data);
+        isEdit ? submitUpdate(task.id, data) : submitCreate(data);
     }
 
     return (
@@ -62,13 +77,13 @@ export default function Modal({ mode, setIsModalOpen }) {
                             required />
 
                         <label htmlFor="description" className="form-label">Description</label>
-                        <input 
+                        <textarea 
                             onChange={(e) => handleChange(e)}
                             value={data.description}
-                            type="text" 
                             id="description" 
                             name="description" 
-                            className="form-input" 
+                            className="form-input border-2 border-gray-300 p-2" 
+                            rows={5}
                             required />
 
                         <label htmlFor="urgency" className="form-label">Urgency</label>
@@ -82,7 +97,7 @@ export default function Modal({ mode, setIsModalOpen }) {
                             className="form-input" 
                             required/>
 
-                        <button type="submit">Add task</button>
+                        <button type="submit">{isEdit ? "Update Task" : "Create task"}</button>
                     </form>
                 </div>
                 

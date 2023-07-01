@@ -79,7 +79,7 @@
 
 @layer components {
     .button {
-        @apply rounded 
+        @apply rounded-md 
             relative 
             inline-flex 
             items-center 
@@ -101,9 +101,10 @@
     .button-secondary {
         @apply active:border-gray-200
             active:shadow-none
-            shadow-lg
-            bg-gradient-to-tr from-gray-200 to-gray-100
-            border-gray-300;
+            shadow-md
+            bg-white
+            border-gray-300
+            border-t-2 border-r-2;
     }
 
     .button .button-body {
@@ -170,7 +171,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.5rem 1rem;
+    padding: 2rem 1rem;
     border-bottom: 1px solid #ccc;
 }
 
@@ -182,8 +183,8 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
+    align-items: start;
+    gap: 2rem;
 }
 
 .ListItem .title {

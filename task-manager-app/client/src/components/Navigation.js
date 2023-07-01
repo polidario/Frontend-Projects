@@ -1,6 +1,6 @@
 import Modal from './Modal';
 import React, { useState } from 'react';
-export default function Navigation() {
+export default function Navigation({ fetchTasks }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     return (
@@ -78,7 +78,7 @@ export default function Navigation() {
                 </div>
             </nav>
 
-            {isModalOpen && <Modal mode="create" setIsModalOpen={setIsModalOpen} />}
+            {isModalOpen && <Modal mode="create" setIsModalOpen={setIsModalOpen} fetchTasks={fetchTasks}/>}
         </>
     )
 }
