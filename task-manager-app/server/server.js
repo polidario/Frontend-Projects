@@ -73,6 +73,51 @@ app.put("/tasks/:id", async (req, res) => {
         console.error(err.message);
     }
 });
+
+app.post('/register', async (req, res) => {
+    const { username, password } = req.body;
+
+    try {
+        const salt = await bcrypt.genSalt();
+        const hashedPassword = await bcrypt.hash(password, salt);
+
+        const newUser = await pool.query(
+            "INSERT INTO users (username, password) VALUES ($1, $2) RETURNING *", 
+            [username, hashedPassword]
+        );
+        res.json(newUser.rows[0]);
+    } catch (err) {
+        console.error(err.message)
+    }
+});
+
+
+app.post('/login', async (req, res) => {
+    const { username, password } = req.body;
+
+    try {
+        const user = await pool.query(
+            "SELECT * FROM users WHERE username = $1",
+            [username]
+        );
+
+        if(user.rows.length === 0) {
+            return res.status(401).json("Invalid Credentials / User does not exist");
+        }
+
+        const validPassword = await bcrypt.compare(password, user.rows[0].password);
+
+        if(!validPassword) {
+            return res.status(401).json("Invalid Credentials / Password is incorrect");
+        } else {
+            const token = jwt.sign({ username: user.rows[0].username }, process.env.JWT_SECRET);
+            res.json(token);
+        }
+    } catch (err) {
+        console.error(err.message);
+    }
+});
+
 app.get('/', (req, res) => {
     res.send('Hello World!')
 })
