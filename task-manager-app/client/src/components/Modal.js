@@ -1,12 +1,15 @@
 import { XMarkIcon } from "@heroicons/react/24/solid";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { postData, updateData } from "../services/taskApi";
 
+import { AuthContext } from "../context/AuthContext.ts";
+
 export default function Modal({ task, mode, setIsModalOpen, fetchTasks }) {
+    const { user } = useContext(AuthContext);
     const [isEdit, setIsEdit] = useState(mode === "edit" ? true : false);
 
     const [data, setData] = useState({
-        username: isEdit ? task.username : "example",
+        username: isEdit ? task.username : user.username,
         title: isEdit ? task.title : "",
         description: isEdit ? task.description : "",
         urgency: isEdit ? task.urgency : 1,
@@ -32,8 +35,8 @@ export default function Modal({ task, mode, setIsModalOpen, fetchTasks }) {
     const submitUpdate = (id, data) => {
         try {
             updateData(id, data).then(() => {
-                fetchTasks();
                 setIsModalOpen(false);
+                fetchTasks();
             });
         } catch (error) {
             console.error(error);
@@ -43,8 +46,8 @@ export default function Modal({ task, mode, setIsModalOpen, fetchTasks }) {
     const submitCreate = (data) => {
         try {
             postData(data).then(() => {
-                fetchTasks();
                 setIsModalOpen(false);
+                fetchTasks();
             });
         } catch (error) {
             console.error(error);
@@ -53,7 +56,13 @@ export default function Modal({ task, mode, setIsModalOpen, fetchTasks }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        isEdit ? submitUpdate(task.id, data) : submitCreate(data);
+        if(!isEdit) {
+            console.log("We'll create a new task!", fetchTasks);
+            submitCreate(data);
+        } else {
+            console.log("We'll update the task!", fetchTasks);
+            submitUpdate(task.id, data);
+        }
     }
 
     return (

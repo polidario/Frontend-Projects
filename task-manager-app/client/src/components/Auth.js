@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { userLogin, userRegister } from '../services/userApi';
-import { useCookies } from 'react-cookie';
+import { useAuth } from '../hooks/useAuth.ts';
 
 export default function Auth() {
-    const [cookies, setCookie, removeCookie] = useCookies(null);
+    const { login } = useAuth();
+
     const [isLogin, setIsLogin] = useState(true);
     const [error, setError] = useState(null);
 
@@ -28,9 +29,8 @@ export default function Auth() {
                     if(res.err) {
                         setError(res.err)
                     } else {
-                        setError(null)
-                        setCookie("authToken", res.token);
-                        setCookie("userEmail", res.email);         
+                        setError(null);
+                        login({ username: res.username, authToken: res.token});
                     }
                 });
             } else {

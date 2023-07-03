@@ -1,7 +1,16 @@
 import Modal from './Modal';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { AuthContext } from '../context/AuthContext.ts';
+import { useAuth } from '../hooks/useAuth.ts';
+
 export default function Navigation({ fetchTasks }) {
+    const { user } = useContext(AuthContext);
+    const { logout } = useAuth();
     const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const Logout = () => {
+        logout();
+    }
 
     return (
         <>
@@ -16,6 +25,10 @@ export default function Navigation({ fetchTasks }) {
                     />
                     <p className="logo_text">Task Managr</p>
                 </a>
+
+                <div className='flex gap-3'>
+                    <h3>{user.username}'s Tasks</h3>
+                </div>
 
                 <div className="sm:flex hidden">
                     <div className='flex gap-3'>
@@ -64,7 +77,11 @@ export default function Navigation({ fetchTasks }) {
                             </span>
                         </button>
 
-                        <button className="button button-secondary">
+                        <button
+                            onClick={() => {
+                                Logout();
+                            }}
+                            className="button button-secondary">
                             <span className="button-body">
                                 <span>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
