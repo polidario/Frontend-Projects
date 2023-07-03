@@ -1,8 +1,18 @@
 import axios from 'axios';
 
-export const getData = async () => {
+export const getAllTasks = async () => {
   try {
     const response = await axios.get(`http://localhost:54321/tasks`)
+    return response.data
+  } catch(err) {
+    console.log(err.message)
+    return [];
+  }
+};
+
+export const getUserTasks = async (username) => {
+  try {
+    const response = await axios.get(`http://localhost:54321/tasks/${username}`)
     return response.data
   } catch(err) {
     console.log(err.message)
