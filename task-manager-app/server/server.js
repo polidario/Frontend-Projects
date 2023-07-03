@@ -109,10 +109,10 @@ app.post('/login', async (req, res) => {
 
         if(!validPassword) {
             return res.status(401).json("Invalid Credentials / Password is incorrect");
-        } else {
-            const token = jwt.sign({ username: user.rows[0].username }, process.env.JWT_SECRET);
-            res.json(token);
         }
+
+        const token = jwt.sign({ username: user.rows[0].username }, process.env.JWT_SECRET, { expiresIn: "1h" });
+        res.json({ username, token});
     } catch (err) {
         console.error(err.message);
     }
