@@ -1,10 +1,8 @@
 import Modal from './Modal';
-import React, { useState, useContext } from 'react';
-import { AuthContext } from '../context/AuthContext.ts';
+import React, { useState } from 'react';
 import { useAuth } from '../hooks/useAuth.ts';
 
 export default function Navigation({ fetchTasks }) {
-    const { user } = useContext(AuthContext);
     const { logout } = useAuth();
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -14,7 +12,7 @@ export default function Navigation({ fetchTasks }) {
 
     return (
         <>
-            <nav className='flex justify-between w-full pt-3 mb-16'>
+            <nav className='flex justify-between items-center w-full pt-3 mb-16'>
                 <a href="/" className='flex items-center gap-2'>
                     <img
                         src="/assets/images/logo.svg"
@@ -25,10 +23,6 @@ export default function Navigation({ fetchTasks }) {
                     />
                     <p className="logo_text">Task Managr</p>
                 </a>
-
-                <div className='flex gap-3'>
-                    <h3>{user.username}'s Tasks</h3>
-                </div>
 
                 <div className="sm:flex hidden">
                     <div className='flex gap-3'>
@@ -73,7 +67,7 @@ export default function Navigation({ fetchTasks }) {
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                                     </svg>
                                 </span>
-                                New task
+                                <span className='hidden md:block'>New task</span>
                             </span>
                         </button>
 

@@ -47,3 +47,13 @@ export const updateData = async (id, data) => {
     return [];
   }
 }
+
+export const deleteData = async (id) => {
+  try {
+    const response = await axios.delete(`http://localhost:54321/tasks/${id}`);
+    return response.data;
+  } catch (err) {
+    console.error(err.message);
+    return [];
+  }
+}

@@ -1,9 +1,24 @@
 import React from 'react';
 import TickIcon from './TickIcon';
 import UrgencyBar from './UrgencyBar';
+import { deleteData } from '../services/taskApi';
 
 export default function ListItem({ task, fetchTasks, openModal }) {
     const { id, title, description } = task;
+
+    const deleteTask = async (id) => {
+        const confirmDelete = window.confirm("Are you sure you want to delete this task?");
+    
+        if (confirmDelete) {
+            try {
+                await deleteData(id).then((res) => {
+                    fetchTasks();
+                });
+            } catch (err) {
+                console.log(err)
+            }
+        }
+    };
 
     return (
         <div className="ListItem" key={id}>
@@ -24,9 +39,7 @@ export default function ListItem({ task, fetchTasks, openModal }) {
                 }}>Edit</button>
 
                 <button className='delete' onClick={() => {
-                    if (window.confirm("Are you sure you want to delete this task?")) {
-                        fetchTasks();
-                    }
+                    deleteTask(id);
                 }}
                 >Delete</button>
             </div>
