@@ -8,10 +8,14 @@ import { getData } from "./services/taskApi";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 
+import { AuthContext } from "./context/AuthContext.ts";
+
 function App() {
 	const [cookies] = useCookies(null);
 	const username = cookies.username ?? '';
 	const authToken = cookies.authToken ?? '';
+
+	const [user, setUser] = useState(null);
 	const [completed, setCompleted] = useState(0);
 	const [isLoading, setIsLoading] = useState(true);
 	const [isModalOpen, setIsModalOpen] = useState(false);
@@ -44,25 +48,28 @@ function App() {
 		
 	return (
 		<>
-			<div className='main'>
-				<div className='gradient'/>
-			</div>
+			<AuthContext.Provider value={{ user, setUser }}>
+				<div className='main'>
+					<div className='gradient'/>
+				</div>
 
-			{!authToken && <Auth />}
-			{authToken && (
-				<main className="app">
-					<Navigation />
-					{isLoading && <ProgressBar progress={completed}/>}
-					<div className="container">
-						{sortedTasks.map((task) => {
-							return (
-								<ListItem key={task.id} task={task} fetchTasks={fetchTasks} openModal={openModal} />
-							);
-						})}
-					</div>
-					{isModalOpen && (<Modal setIsModalOpen={setIsModalOpen} mode={'edit'} task={selectedTask} fetchTasks={fetchTasks} />)}
-				</main>
-			)}
+				{!authToken && <Auth />}
+				{authToken && (
+					<main className="app">
+						<Navigation />
+						{isLoading && <ProgressBar progress={completed}/>}
+						<div className="container">
+							{sortedTasks.map((task) => {
+								return (
+									<ListItem key={task.id} task={task} fetchTasks={fetchTasks} openModal={openModal} />
+								);
+							})}
+						</div>
+						{isModalOpen && (<Modal setIsModalOpen={setIsModalOpen} mode={'edit'} task={selectedTask} fetchTasks={fetchTasks} />)}
+					</main>
+				)}
+			</AuthContext.Provider>
+			
 		</>
 		
 	);
