@@ -4,9 +4,8 @@ export interface IUser {
     authToken: string,
 }
 
-export interface IAuthContenxt {
+export interface IAuthContext {
     user: IUser,
     setUser: (user: IUser) => void,
-
 }
 

@@ -20,3 +20,5 @@ export const useLocalStorage = () => {
 
     return { value, setItem, getItem, removeItem };
 }
+
+export default useLocalStorage;

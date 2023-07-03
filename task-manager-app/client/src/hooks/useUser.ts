@@ -19,3 +19,5 @@ export const useUser = () => {
 
     return { user, addUser, removeUser };
 }
+
+export default useUser;
