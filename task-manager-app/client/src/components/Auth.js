@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { userLogin, userRegister } from '../services/userApi';
+import { useCookies } from 'react-cookie';
 
 export default function Auth() {
+    const [cookies, setCookie, removeCookie] = useCookies(null);
     const [isLogin, setIsLogin] = useState(true);
     const [error, setError] = useState(null);
 
@@ -23,9 +25,12 @@ export default function Auth() {
         try {
             if(isLogin) {
                 userLogin(username, password).then((res) => {
-                    if (res.status === 200) {
-                        setError(null);
-                        window.location.reload();
+                    if(res.err) {
+                        setError(res.err)
+                    } else {
+                        setError(null)
+                        setCookie("authToken", res.token);
+                        setCookie("userEmail", res.email);         
                     }
                 });
             } else {
@@ -35,7 +40,7 @@ export default function Auth() {
                             console.log(res);
                         }
                     });
-                    
+
                     setError(null);
                 } else {
                     setError("Passwords do not match");
@@ -97,6 +102,7 @@ export default function Auth() {
                             type="password"
                             id="password"
                             name="password"
+                            autoComplete={isLogin ? "current-password" : "new-password"}
                             className="block w-full p-4 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             required
                         />
@@ -114,6 +120,7 @@ export default function Auth() {
                                 type="password"
                                 id="confirmPassword"
                                 name="confirmPassword"
+                                autoComplete={isLogin ? "current-password" : "new-password"}
                                 className="block w-full p-4 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 required
                             />

@@ -2,11 +2,16 @@ import ListItem from "./components/ListItem";
 import Modal from "./components/Modal";
 import Navigation from "./components/Navigation";
 import ProgressBar from "./components/ProgressBar";
+import Auth from "./components/Auth";
+
 import { getData } from "./services/taskApi";
 import { useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
 
 function App() {
-	const username = "example";
+	const [cookies] = useCookies(null);
+	const username = cookies.username ?? '';
+	const authToken = cookies.authToken ?? '';
 	const [completed, setCompleted] = useState(0);
 	const [isLoading, setIsLoading] = useState(true);
 	const [isModalOpen, setIsModalOpen] = useState(false);
@@ -28,7 +33,9 @@ function App() {
 
 	useEffect(() => {
 		setInterval(() => setCompleted(Math.floor(Math.random() * 100) + 1), 1000);
-		fetchTasks();
+		if(authToken) {
+			fetchTasks();
+		}
 	}, []);
 
 	const sortedTasks = tasks.sort((a, b) => {
@@ -41,18 +48,21 @@ function App() {
 				<div className='gradient'/>
 			</div>
 
-			<main className="app">
-				<Navigation />
-				{isLoading && <ProgressBar progress={completed}/>}
-				<div className="container">
-					{sortedTasks.map((task) => {
-						return (
-							<ListItem key={task.id} task={task} fetchTasks={fetchTasks} openModal={openModal} />
-						);
-					})}
-				</div>
-				{isModalOpen && (<Modal setIsModalOpen={setIsModalOpen} mode={'edit'} task={selectedTask} fetchTasks={fetchTasks} />)}
-			</main>
+			{!authToken && <Auth />}
+			{authToken && (
+				<main className="app">
+					<Navigation />
+					{isLoading && <ProgressBar progress={completed}/>}
+					<div className="container">
+						{sortedTasks.map((task) => {
+							return (
+								<ListItem key={task.id} task={task} fetchTasks={fetchTasks} openModal={openModal} />
+							);
+						})}
+					</div>
+					{isModalOpen && (<Modal setIsModalOpen={setIsModalOpen} mode={'edit'} task={selectedTask} fetchTasks={fetchTasks} />)}
+				</main>
+			)}
 		</>
 		
 	);
