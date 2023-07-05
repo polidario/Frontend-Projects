@@ -57,10 +57,8 @@ export default function Modal({ task, mode, setIsModalOpen, fetchTasks }) {
     const handleSubmit = (e) => {
         e.preventDefault();
         if(!isEdit) {
-            console.log("We'll create a new task!", fetchTasks);
             submitCreate(data);
         } else {
-            console.log("We'll update the task!", fetchTasks);
             submitUpdate(task.id, data);
         }
     }
@@ -91,7 +89,7 @@ export default function Modal({ task, mode, setIsModalOpen, fetchTasks }) {
                             value={data.description}
                             id="description" 
                             name="description" 
-                            className="form-input border-2 border-gray-300 p-2" 
+                            className="form-input" 
                             rows={5}
                             required />
 
@@ -106,7 +104,7 @@ export default function Modal({ task, mode, setIsModalOpen, fetchTasks }) {
                             className="form-input" 
                             required/>
 
-                        <button type="submit">{isEdit ? "Update Task" : "Create task"}</button>
+                        <button className='button button-primary' type="submit">{isEdit ? "Update Task" : "Create task"}</button>
                     </form>
                 </div>
                 
