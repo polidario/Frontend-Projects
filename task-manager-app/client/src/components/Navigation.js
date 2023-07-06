@@ -1,10 +1,12 @@
 import Modal from './Modal';
 import React, { useState } from 'react';
 import { useAuth } from '../hooks/useAuth.ts';
+import profile from '../assets/images/profile.png';
 
 export default function Navigation({ fetchTasks }) {
     const { logout } = useAuth();
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [profileToggleDropdown, setProfileToggleDropdown] = useState(false);
 
     const Logout = () => {
         logout();
@@ -24,8 +26,8 @@ export default function Navigation({ fetchTasks }) {
                     <p className="logo_text">Task Managr</p>
                 </a>
 
-                <div className="sm:flex hidden">
-                    <div className='flex gap-3'>
+                <div className="sm:flex hidden relative">
+                    <div className='flex items-center gap-5'>
                         <button 
                             onClick={() => {
                                 setIsModalOpen(true);
@@ -41,21 +43,39 @@ export default function Navigation({ fetchTasks }) {
                             </span>
                         </button>
 
-                        <button className="button button-secondary">
-                            <span className="button-body">
-                                <span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
-                                    </svg>
-                                </span>
-                                Logout
-                            </span>
-                        </button>
+                        <img 
+                            onClick={() => { 
+                                setProfileToggleDropdown((prevState) => !prevState)}
+                            }
+                            src={profile} alt="Avatar" 
+                            className="w-10 h-10 rounded-full" />
+
+                        {profileToggleDropdown && (
+                            <div className="dropdown">
+                                <a
+                                    href="/profile"
+                                    className="dropdown_link"
+                                    onClick={() => setProfileToggleDropdown(false)}
+                                >
+                                    My Profile
+                                </a>
+
+                                <button
+                                    className="dropdown_link"
+                                    onClick={() => {
+                                        setProfileToggleDropdown(false);
+                                        Logout();
+                                    }}
+                                >
+                                    Sign Out
+                                </button>
+                            </div>
+                        )}
                     </div>
                 </div>
 
                 <div className="sm:hidden flex relative">
-                    <div className='flex'>
+                    <div className='flex items-center gap-5'>
                         <button 
                             onClick={() => {
                                 setIsModalOpen(true);
@@ -71,20 +91,34 @@ export default function Navigation({ fetchTasks }) {
                             </span>
                         </button>
 
-                        <button
-                            onClick={() => {
-                                Logout();
-                            }}
-                            className="button button-secondary">
-                            <span className="button-body">
-                                <span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
-                                    </svg>
-                                </span>
-                                Logout
-                            </span>
-                        </button>
+                        <img 
+                            onClick={() => { 
+                                setProfileToggleDropdown((prevState) => !prevState)}
+                            }
+                            src={profile} alt="Avatar" 
+                            className="w-10 h-10 rounded-full" />
+
+                        {profileToggleDropdown && (
+                            <div className="dropdown">
+                                <a
+                                    href="/profile"
+                                    className="dropdown_link"
+                                    onClick={() => setProfileToggleDropdown(false)}
+                                >
+                                    My Profile
+                                </a>
+
+                                <button
+                                    className="dropdown_link"
+                                    onClick={() => {
+                                        setProfileToggleDropdown(false);
+                                        Logout();
+                                    }}
+                                >
+                                    Sign Out
+                                </button>
+                            </div>
+                        )}
                     </div>
                 </div>
             </nav>
