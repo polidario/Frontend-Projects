@@ -3,6 +3,7 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const mongoose = require ('mongoose');
 const session = require('express-session');
+const cors = require('cors');
 
 // Routes
 const GameRoutes = require('./routes/game');
@@ -19,6 +20,7 @@ try {
 }
 
 const app = express();
+app.use(cors());
 app.use(helmet());
 app.use(morgan('common'));
 app.use(express.json());

@@ -43,6 +43,8 @@ Router.post('/login', async (request, response) => {
             active: true
         });
 
+        console.log(email, password, user);
+
         if (user) {
             let verif = await bcrypt.compare(password, user.password);
 
