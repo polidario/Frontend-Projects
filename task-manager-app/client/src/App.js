@@ -33,7 +33,7 @@ function App() {
 		if(user) {
 			fetchTasks();
 		}
-	});
+	}, []);
 
 	const sortedTasks = tasks.sort((a, b) => {
 		return a.id - b.id;
