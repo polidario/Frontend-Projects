@@ -1,13 +1,13 @@
-import ListItem from "./components/ListItem";
-import Modal from "./components/Modal";
-import Navigation from "./components/Navigation";
-import ProgressBar from "./components/ProgressBar";
-import Auth from "./components/Auth";
+import ListItem from "../components/ListItem";
+import Modal from "../components/Modal";
+import Navigation from "../components/Navigation";
+import ProgressBar from "../components/ProgressBar";
+import Auth from "../components/Auth";
 
-import { getUserTasks } from "./services/taskApi";
+import { getUserTasks } from "../services/taskApi";
 import { useEffect, useState } from "react";
 
-import { AuthContext } from "./context/AuthContext.ts";
+import { AuthContext } from "../context/AuthContext";
 
 function App() {
 	const [user, setUser] = useState(null);
