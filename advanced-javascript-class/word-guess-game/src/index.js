@@ -20,7 +20,12 @@ try {
 }
 
 const app = express();
-app.use(cors());
+app.use(cors(
+    {
+        origin: 'http://localhost:3000',
+        credentials: true
+    }
+));
 app.use(helmet());
 app.use(morgan('common'));
 app.use(express.json());
