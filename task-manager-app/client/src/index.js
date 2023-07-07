@@ -8,6 +8,7 @@ import {
   createBrowserRouter,
   RouterProvider
 } from 'react-router-dom';
+import Root from './Main';
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,8 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Root>
+      <RouterProvider router={router} />
+    </Root>
   </React.StrictMode>
 );

@@ -1,8 +1,6 @@
 const config = require('../config/db.config.js');
 const Pool = require('pg').Pool;
 
-console.log(config);
-
 const pool = new Pool({
     user: config.USER,
     host: config.HOST,

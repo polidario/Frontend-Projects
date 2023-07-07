@@ -128,6 +128,41 @@ app.post('/login', async (req, res) => {
     }
 });
 
+app.get('/user/:username', async (req, res) => {
+    const { username } = req.params;
+
+    try {
+        const user = await pool.query(
+            "SELECT * FROM users WHERE username = $1",
+            [username]
+        );
+
+        if(user.rows.length === 1) {
+            return res.status(200).json(user.rows[0]);
+        } else {
+            return res.status(404).json("Wrong request");
+        }
+    } catch (err) {
+        console.error(err.message);
+    }
+});
+
+app.post('/user/:username', async (req, res) => {
+    const { username } = req.params;
+    const { email, first_name, last_name, date_of_birth } = req.body;
+
+    try {
+        const updateUser = await pool.query(
+            "UPDATE users SET email = $1, first_name = $2, last_name = $3, date_of_birth = $4 WHERE username = $5",
+            [email, first_name, last_name, date_of_birth, username]
+        );
+
+        res.json("User was updated!");
+    } catch (err) {
+        console.error(err.message);
+    }
+});
+
 app.get('/', (req, res) => {
     res.send('Hello World!')
 })
