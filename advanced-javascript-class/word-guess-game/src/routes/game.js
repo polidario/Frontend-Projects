@@ -1,6 +1,7 @@
 const express = require('express');
 const WordModel = require('../models/word');
 const GameModel = require("../models/game");
+const TryModel = require("../models/try");
 
 const Router = express.Router();
 
@@ -15,6 +16,7 @@ Router.post('/', async (request, response) => {
         user: request.session.user._id
     });
 
+    request.session.game = game._id;
     request.session.word = word[0];
 
     try {
@@ -49,7 +51,7 @@ Router.get('/:id', async (request, response) => {
     }
 })
 
-Router.post('/verifyWord', (request, response) => {
+Router.post('/verifyWord', async (request, response) => {
     // The status of each letter in the word
     // 1 = letter is the same and in the correct position
     // 0 = letter is the same but in the wrong position
@@ -78,7 +80,20 @@ Router.post('/verifyWord', (request, response) => {
         }
     }
 
-    console.log(status);
+    const tryModel = new TryModel({
+        word: word,
+        status: status
+    });
+
+
+    const game = await GameModel.findOne({ _id: request.session.game });
+    game.tries.push({
+        word: word,
+        status: status
+    });
+
+    console.log(game);
+    console.log(request.session.game);
 
     if (typeof word === 'undefined') {
         return response.status(500).json({
@@ -98,11 +113,13 @@ Router.post('/verifyWord', (request, response) => {
 
     if (word == search.name) {
         return response.status(200).json({
-            "result": "Congratulations ! You found the right word."
+            "result": "Congratulations ! You found the right word.",
+            "guess": status
         });
     } else {
         return response.status(500).json({
-            "result": "Sorry ! That was not the right word."
+            "result": "Sorry ! That was not the right word.",
+            "guess": status
         });
     }
 })
