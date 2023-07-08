@@ -1,7 +1,7 @@
 import ListItem from "../components/ListItem";
 import Modal from "../components/Modal";
 import Navigation from "../components/Navigation";
-import ProgressBar from "../components/ProgressBar";
+import Loading from "../components/Loading";
 import Auth from "../components/Auth";
 
 import { getUserTasks } from "../services/taskApi";
@@ -49,7 +49,7 @@ function App() {
 			{!user ? <Auth /> : (
 				<main className="app">
 					<Navigation fetchTasks={fetchTasks}/>
-					{isLoading && <ProgressBar />}
+					{isLoading && <Loading />}
 
 					<div className="flex flex-col gap-5 w-full md:w-1/2">
 						<h2 className="text-xl md:text-3xl font-bold pb-5 border-dotted border-gray-700 border-b-2 text-center">Hello, {user.username} 👋</h2>

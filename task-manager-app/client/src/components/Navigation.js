@@ -23,7 +23,7 @@ export default function Navigation({ fetchTasks }) {
                         height={50}
                         className="object-contain"
                     />
-                    <p className="logo_text">Task Managr</p>
+                    <p className="logo_text">Task Manager</p>
                 </a>
 
                 <div className="sm:flex hidden relative">
@@ -48,7 +48,7 @@ export default function Navigation({ fetchTasks }) {
                                 setProfileToggleDropdown((prevState) => !prevState)}
                             }
                             src={profile} alt="Avatar" 
-                            className="w-10 h-10 rounded-full" />
+                            className="w-10 h-10 rounded-full cursor-pointer" />
 
                         {profileToggleDropdown && (
                             <div className="dropdown">

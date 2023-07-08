@@ -78,6 +78,38 @@
 }
 
 @layer components {
+    .loading {
+        @apply fixed top-0 left-0 w-full h-full flex justify-center items-center bg-white z-50;
+    }
+
+    .loading .spinner {
+        @apply w-16 h-16 rounded-full animate-spin;
+    }
+
+    .checkbox {
+        @apply w-5 h-5 rounded accent-green-900;
+    }
+
+    .tab-list {
+        @apply flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row;
+    }
+
+    .urgency {
+        @apply rounded-full px-2 py-1 text-xs font-bold text-white flex flex-row gap-2 items-center;
+    }
+
+    .urgency-low {
+        @apply bg-green-500;
+    }
+
+    .urgency-medium {
+        @apply bg-yellow-500;
+    }
+
+    .urgency-high {
+        @apply bg-red-500;
+    }
+
     .button {
         @apply rounded-md 
             relative 
@@ -138,8 +170,8 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 0.5rem 1rem;
-        border-bottom: 1px solid #9a9999;
+        padding: 1rem 1rem;
+        border-bottom: 1px solid #cccccc;
     }
 
     .Modal .modal-header .modal-title {
@@ -159,7 +191,6 @@
 
     .Modal .modal-content form label {
         font-size: 1rem;
-        font-weight: bold;
     }
 
     .Modal .modal-content form input,
@@ -235,7 +266,7 @@ body {
 .ListItem {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: start;
     padding: 2rem 1rem;
     border-bottom: 1px solid #ccc;
 }
@@ -253,8 +284,7 @@ body {
 }
 
 .ListItem .title {
-    font-size: 1.25rem;
-    font-weight: bold;
+    @apply font-bold text-base md:text-lg;
 }
 
 .ListItem .description {
@@ -263,10 +293,7 @@ body {
 }
 
 .ListItem .button-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 0.5rem;
+    @apply flex flex-row gap-2 items-end justify-between;
 }
 
 .icon {
@@ -277,9 +304,9 @@ body {
 }
 
 .icon {
-    color: #00c853;
+    color: #111111;
 }
 
 .icon:hover {
-    color: #00e676;
+    color: #242424;
 }

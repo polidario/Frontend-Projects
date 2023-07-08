@@ -74,6 +74,22 @@ app.put("/tasks/:id", async (req, res) => {
     }
 });
 
+app.put("/tasks/:id/complete", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { completed } = req.body;
+
+        await pool.query(
+            "UPDATE tasks SET completed = $2 WHERE id = $1",
+            [id, completed]
+        );
+
+        res.json("Task was completed!");
+    } catch (err) {
+        console.error(err.message);
+    }
+});
+
 app.delete("/tasks/:id", async (req, res) => {
     try {
         const { id } = req.params;

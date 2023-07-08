@@ -48,6 +48,21 @@ export const updateData = async (id, data) => {
   }
 }
 
+export const updateTaskStatus = async (id, data) => {
+  try {
+    const response = await axios.put(`http://localhost:54321/tasks/${id}/complete`, JSON.stringify(data), {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    return response.data;
+  } catch (err) {
+    console.error(err.message);
+    return [];
+  }
+}
+
 export const deleteData = async (id) => {
   try {
     const response = await axios.delete(`http://localhost:54321/tasks/${id}`);
