@@ -4,7 +4,6 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-  useLoaderData,
 } from '@remix-run/react';
 import styles from './styles/app.css';
 import favicon from '../public/favicon.svg';
@@ -30,10 +29,6 @@ export async function loader({context}) {
 }
 
 export default function App() {
-  const data = useLoaderData();
-
-  const {name} = data.layout.shop;
-
   return (
     <html lang="en">
       <head>
@@ -43,8 +38,6 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <h1>Hello, {name}</h1>
-        <p>This is a custom storefront powered by Hydrogen</p>
         <Outlet />
         <ScrollRestoration />
         <Scripts />

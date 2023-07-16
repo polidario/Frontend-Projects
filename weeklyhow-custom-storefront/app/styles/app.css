@@ -1,3 +1,9 @@
+.language {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 body {
   margin: 0;
   background: #FFFFFF;
