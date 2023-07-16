@@ -36,7 +36,15 @@ function App() {
 		}
 	}, [user]);
 
-	const sortedTasks = tasks.sort((a, b) => {
+	const pendingTasks = tasks.filter((task, index) => {
+		return !task.completed;
+	});
+
+	const completedTasks = tasks.filter((task, index) => {
+		return task.completed;
+	});
+
+	const sortedTasks = pendingTasks.sort((a, b) => {
 		return a.id - b.id;
 	});
 		
@@ -51,11 +59,23 @@ function App() {
 					<Navigation fetchTasks={fetchTasks}/>
 					{isLoading && <Loading />}
 
-					<div className="flex flex-col gap-5 w-full md:w-1/2">
+					<div className="flex flex-col gap-5 w-full">
 						<h2 className="text-xl md:text-3xl font-bold pb-5 border-dotted border-gray-700 border-b-2 text-center">Hello, {user.username} 👋</h2>
 						{
-						tasks.length > 0 ? 
-							<p className="text-center text-gray-500">You have {tasks.length} pending tasks.</p>
+						pendingTasks.length > 0 ? 
+							(
+								<>
+									<p className="text-center text-gray-500">You have {pendingTasks.length} pending tasks.</p>
+									
+									<div className="container">
+										{sortedTasks.map((task) => {
+											return (
+												<ListItem key={task.id} task={task} fetchTasks={fetchTasks} openModal={openModal} />
+											);
+										})}
+									</div>
+								</>
+							)
 							: 
 							(
 								<div className="flex flex-col items-center gap-5">
@@ -73,17 +93,19 @@ function App() {
 							)
 						}
 					</div>
-					
 
-
-					<div className="container">
-						{sortedTasks.map((task) => {
+					<div className="container mt-20 opacity-30">
+						<div>
+							<h2 className="text-base md:text-lg font-bold pb-5 text-center">Compeleted Tasks</h2>
+						</div>
+						{completedTasks.map((task) => {
 							return (
 								<ListItem key={task.id} task={task} fetchTasks={fetchTasks} openModal={openModal} />
 							);
 						})}
 					</div>
-					{(isModalOpen && tasks.length < 1) && (<Modal mode="create" setIsModalOpen={setIsModalOpen} fetchTasks={fetchTasks}/>)}
+
+					{(isModalOpen && pendingTasks.length < 1) && (<Modal mode="create" setIsModalOpen={setIsModalOpen} fetchTasks={fetchTasks}/>)}
 					{(isModalOpen && tasks.length > 0) && (<Modal setIsModalOpen={setIsModalOpen} mode={'edit'} task={selectedTask} fetchTasks={fetchTasks} />)}
 				</main>
 			)}
