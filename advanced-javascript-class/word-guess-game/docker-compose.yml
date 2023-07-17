@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./src:/app
+    ports:
+      - 9001:5000
+    environment:
+      PORT: 5000
+      SECRET: 'the_secret_youll_never_understand'
+      MONGODB: 'mongodb://root:root@mongo:27017/game?authSource=admin'
+
+  mongo:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+      MONGO_INITDB_DATABASE: game
+  
+  mongo-express:
+    image: mongo-express
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: root
+      ME_CONFIG_MONGODB_URL: mongodb://root:root@mongo:27017/
