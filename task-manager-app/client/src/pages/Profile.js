@@ -82,7 +82,7 @@ export default function Profile() {
                         <Navigation />
                         
                         <div className="flex flex-col gap-5 w-full md:w-1/2">
-                            <h2 className="text-xl md:text-3xl font-bold pb-5 border-dotted border-gray-700 border-b-2 text-center">Hello, {user.username} 👋</h2>
+                            <h2 className="text-xl md:text-3xl font-bold pb-5 border-dotted border-gray-700 border-b-2 text-center">Hello, {data.first_name} 👋</h2>
 
                             {isProfileUpdated && (
                                 <div class="sm:mx-auto sm:w-full sm:max-w-sm mt-5 bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 shadow-md" role="alert">
