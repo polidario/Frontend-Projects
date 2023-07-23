@@ -7,6 +7,7 @@ import Loading from "./Loading";
 
 export default function Modal({ task, mode, setIsModalOpen, fetchTasks }) {
     const { user } = useContext(AuthContext);
+
     const [isEdit, setIsEdit] = useState(mode === "edit" ? true : false);
     const [isLoading, setIsLoading] = useState(false);
     const [data, setData] = useState({

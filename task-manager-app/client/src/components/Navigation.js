@@ -1,9 +1,14 @@
 import Modal from './Modal';
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth.ts';
 import profile from '../assets/images/profile.png';
+import { ReactComponent as PlusIcon } from '../assets/images/plus.svg';
+import { ReactComponent as LeftArrowIcon } from '../assets/images/left-arrow.svg';
 
 export default function Navigation({ fetchTasks }) {
+    let location = useLocation();
+
     const { logout } = useAuth();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [profileToggleDropdown, setProfileToggleDropdown] = useState(false);
@@ -28,20 +33,28 @@ export default function Navigation({ fetchTasks }) {
 
                 <div className="sm:flex hidden relative">
                     <div className='flex items-center gap-5'>
-                        <button 
-                            onClick={() => {
-                                setIsModalOpen(true);
-                            }}
-                            className="button button-primary">
-                            <span className="button-body">
-                                <span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                                    </svg>
-                                </span>
-                                New task
-                            </span>
-                        </button>
+                        {
+                            location.pathname === '/' ? (
+                                <button 
+                                    onClick={() => {
+                                        setIsModalOpen(true);
+                                    }}
+                                    className="button button-primary">
+                                    <span className="button-body">
+                                        <PlusIcon className="w-5 h-5" />
+                                        New task
+                                    </span>
+                                </button>
+                            ) : (
+                                <a href="/" className="button button-primary">
+                                    <span className="button-body">
+                                        <LeftArrowIcon className="w-5 h-5" />
+                                        Back to home
+                                    </span>
+                                </a>
+                            )
+                        }
+                        
 
                         <img 
                             onClick={() => { 
