@@ -1,0 +1,311 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    * {
+        box-sizing: border-box;
+    }
+    
+    .main {
+        width: 100%;
+        min-height: 100vh;
+        position: fixed;
+        display: flex;
+        justify-content: center;
+        padding: 120px 24px 160px 24px;
+        pointer-events: none;
+    }
+      
+    .main:before {
+        background: radial-gradient(circle, rgba(2, 0, 36, 0) 0, #fafafa 100%);
+        position: absolute;
+        content: "";
+        z-index: 2;
+        width: 100%;
+        height: 100%;
+        top: 0;
+    }
+    
+    .main:after {
+        content: "";
+        /** background-image: url("/assets/images/grid.svg"); */
+        z-index: 1;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        opacity: 0.4;
+        filter: invert(1);
+    }
+      
+    .gradient {
+        height: fit-content;
+        z-index: 3;
+        width: 100%;
+        max-width: 640px;
+        background-image: radial-gradient(
+            at 27% 37%,
+            hsla(215, 98%, 61%, 1) 0px,
+            transparent 0%
+          ),
+          radial-gradient(at 97% 21%, hsla(125, 98%, 72%, 1) 0px, transparent 50%),
+          radial-gradient(at 52% 99%, hsla(354, 98%, 61%, 1) 0px, transparent 50%),
+          radial-gradient(at 10% 29%, hsla(256, 96%, 67%, 1) 0px, transparent 50%),
+          radial-gradient(at 97% 96%, hsla(38, 60%, 74%, 1) 0px, transparent 50%),
+          radial-gradient(at 33% 50%, hsla(222, 67%, 73%, 1) 0px, transparent 50%),
+          radial-gradient(at 79% 53%, hsla(343, 68%, 79%, 1) 0px, transparent 50%);
+        position: absolute;
+        content: "";
+        width: 100%;
+        height: 100%;
+        filter: blur(100px) saturate(150%);
+        top: 80px;
+        opacity: 0.15;
+    }
+      
+    @media screen and (max-width: 640px) {
+        .main {
+          padding: 0;
+        }
+    }
+
+    .app {
+        @apply relative z-10 flex justify-center items-center flex-col max-w-7xl mx-auto sm:px-16 px-6 mb-32;
+    }
+}
+
+@layer components {
+    .loading {
+        @apply fixed top-0 left-0 w-full h-full flex justify-center items-center bg-white z-50;
+    }
+
+    .loading .spinner {
+        @apply w-16 h-16 rounded-full animate-spin;
+    }
+
+    .checkbox {
+        @apply w-5 h-5 rounded accent-green-900;
+    }
+
+    .tab-list {
+        @apply flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row;
+    }
+
+    .urgency {
+        @apply rounded-full px-2 py-1 text-xs font-bold text-white flex flex-row gap-2 items-center;
+    }
+
+    .urgency-low {
+        @apply bg-green-500;
+    }
+
+    .urgency-medium {
+        @apply bg-yellow-500;
+    }
+
+    .urgency-high {
+        @apply bg-red-500;
+    }
+
+    .button {
+        @apply rounded-md 
+            relative 
+            inline-flex 
+            items-center 
+            justify-center 
+            px-5 py-2 
+            cursor-pointer 
+            border-b-4 border-l-2;
+    }
+
+    .button-primary {
+        @apply active:border-purple-600 
+            active:shadow-none 
+            shadow-lg 
+            bg-gradient-to-tr from-purple-600 to-purple-500 
+            border-purple-700 text-white;
+    }
+
+    .button-secondary {
+        @apply active:border-gray-200
+            active:shadow-none
+            shadow-md
+            bg-white
+            border-gray-300
+            border-t-2 border-r-2;
+    }
+
+    .button .button-body {
+        @apply relative flex flex-row gap-3 items-center;
+    }
+}
+
+@layer components {
+    .Modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 100;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.25);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .Modal .modal-container {
+        background-color: #fff;
+        border-radius: 4px;
+        padding: 1rem;
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .Modal .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 1rem;
+        border-bottom: 1px solid #cccccc;
+    }
+
+    .Modal .modal-header .modal-title {
+        font-size: 1.25rem;
+        font-weight: bold;
+    }
+
+    .Modal .modal-content {
+        padding: 1rem;
+    }
+
+    .Modal .modal-content form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .Modal .modal-content form label {
+        font-size: 1rem;
+    }
+
+    .Modal .modal-content form input,
+    .Modal .modal-content form textarea {
+        padding: 0.5rem 1rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 1rem;
+    }
+
+    .Modal .modal-content form input:focus,
+    .Modal .modal-content form textarea:focus {
+        outline: none;
+        border-color: #00c853;
+    }
+}
+
+
+/* Nav Component */
+.logo_text {
+    @apply max-sm:hidden font-satoshi font-semibold text-lg text-black tracking-wide;
+}
+  
+.dropdown {
+    @apply absolute right-0 top-full mt-3 w-full p-5 rounded-lg bg-white max-w-[210px] flex flex-col gap-2 justify-end items-end;
+}
+  
+.dropdown_link {
+    @apply text-sm font-inter my-1 text-gray-700 hover:text-gray-500 font-medium;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.App {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.ListHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+}
+
+.ListHeader button,
+.ListItem .button-container button,
+.Modal .modal-container form button {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.ListHeader button:hover {
+    border-color: #999;
+    background-color: #f0f0f0;
+}
+
+.ListItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    padding: 2rem 1rem;
+    border-bottom: 1px solid #ccc;
+}
+
+.ListItem:last-child {
+    border-bottom: none;
+}
+
+.ListItem .item-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: start;
+    gap: 2rem;
+}
+
+.ListItem .title {
+    @apply font-bold text-base md:text-lg;
+}
+
+.ListItem .description {
+    font-size: 1rem;
+    color: #666;
+}
+
+.ListItem .button-container {
+    @apply flex flex-row gap-2 items-end justify-between;
+}
+
+.icon {
+    font-size: 1.5rem;
+    color: #ccc;
+    cursor: pointer;
+    width: 1.5rem;
+}
+
+.icon {
+    color: #111111;
+}
+
+.icon:hover {
+    color: #242424;
+}
