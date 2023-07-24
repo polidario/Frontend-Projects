@@ -82,18 +82,23 @@ Router.post('/verifyWord', async (request, response) => {
 
     const tryModel = new TryModel({
         word: word,
-        status: status
+        result: status.toString(),
     });
 
+    try {
+        const game = await GameModel.findOne({ _id: request.session.game });
+        game.tries.push(tryModel);
 
-    const game = await GameModel.findOne({ _id: request.session.game });
-    game.tries.push({
-        word: word,
-        status: status
-    });
+        await game.save();
+        await tryModel.save();
+        console.log(game);
+        console.log(tryModel);
 
-    console.log(game);
-    console.log(request.session.game);
+    } catch (error) {
+        return response.status(500).json({
+            "error": error.message
+        });
+    }
 
     if (typeof word === 'undefined') {
         return response.status(500).json({
@@ -119,6 +124,7 @@ Router.post('/verifyWord', async (request, response) => {
     } else {
         return response.status(500).json({
             "result": "Sorry ! That was not the right word.",
+            "yourWord": word,
             "guess": status
         });
     }

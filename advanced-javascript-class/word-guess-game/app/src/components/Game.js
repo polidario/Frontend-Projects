@@ -5,6 +5,7 @@ import { LOGIN_API } from "../utils/api";
 
 export default function Game() {
     const [word, setWord] = React.useState("");
+    const [guess, setGuess] = React.useState("");
     const [guesses, setGuesses] = React.useState([]);
     const [tryCount, setTryCount] = React.useState(5);
     const [error, setError] = React.useState("");
@@ -37,7 +38,10 @@ export default function Game() {
             return response.json();
         }).then((data) => {
             setTryCount(tryCount - 1);
-            console.log(data);
+            setGuesses((prevState) => [...prevState, {
+                "guess": guess,
+                "result": data.guess
+            }]);
         });
     }
 
@@ -55,7 +59,6 @@ export default function Game() {
 
         const data = await response.json();
         setWord(data.msg[0].word.name);
-        console.log(data.msg[0].word.name);
     };
 
     const handleLogin = async () => {
@@ -91,7 +94,11 @@ export default function Game() {
             </article>
 
             <div className="space-y-1 overflow-auto">
-                <GridGuesses guesses={guess} />
+                {
+                    guesses.map((value, index) => (
+                        <GridGuesses key={index} guesses={value.guess} result={value.result} />
+                    ))
+                }
             </div>
 
             <div className="flex justify-center gap-4">
@@ -130,7 +137,7 @@ export default function Game() {
                 >
                     <fieldset
                         className="flex gap-4 disabled:opacity-50 disabled:pointer-events-none"
-                        disabled={win || lost}
+                        disabled={win}
                     >
                     <div className="relative flex-1">
                         <input
