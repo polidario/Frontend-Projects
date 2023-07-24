@@ -1,6 +1,6 @@
 import React from "react";
 
-function GridGuesses({ guesses }) {
+function GridGuesses({ guesses, result }) {
     let splitGuesses = [];
     if (!guesses) {
         return null;
@@ -13,10 +13,13 @@ function GridGuesses({ guesses }) {
             <ul className="flex gap-1 sm:justify-center w-fit mx-auto">
                 {splitGuesses.map((value, index) => (
                     <li
-                    key={index}
-                    className={`
-                        w-10 h-10 leading-10 shrink-0 text-center text-sm font-medium bg-gray-700 text-white rounded-sm
-                    `}
+                        key={index}
+                        className={`
+                            w-10 h-10 leading-10 shrink-0 text-center text-sm font-medium text-white rounded-sm
+                        `}
+                        style={{
+                            backgroundColor: result[index] === 1 ? "#10B981" : result[index] === 0 ? "#F59E0B" : "#EF4444"
+                        }}
                     >
                     {value}
                     </li>
