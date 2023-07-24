@@ -5,6 +5,7 @@ import { LOGIN_API } from "../utils/api";
 
 export default function Game() {
     const [word, setWord] = React.useState("");
+    const [guess, setGuess] = React.useState("");
     const [guesses, setGuesses] = React.useState([]);
     const [tryCount, setTryCount] = React.useState(5);
     const [error, setError] = React.useState("");
