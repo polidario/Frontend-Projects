@@ -124,6 +124,7 @@ Router.post('/verifyWord', async (request, response) => {
     } else {
         return response.status(500).json({
             "result": "Sorry ! That was not the right word.",
+            "yourWord": word,
             "guess": status
         });
     }
