@@ -1,0 +1,27 @@
+{
+  "name": "prime-vue-project",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc -b && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@primeuix/themes": "^1.1.2",
+    "@tailwindcss/vite": "^4.1.10",
+    "primevue": "^4.3.5",
+    "tailwindcss-primeui": "^0.6.1",
+    "vue": "^3.5.13"
+  },
+  "devDependencies": {
+    "@primevue/auto-import-resolver": "^4.3.5",
+    "@vitejs/plugin-vue": "^5.2.3",
+    "@vue/tsconfig": "^0.7.0",
+    "typescript": "~5.8.3",
+    "unplugin-vue-components": "^28.7.0",
+    "vite": "^6.3.5",
+    "vue-tsc": "^2.2.8"
+  }
+}
