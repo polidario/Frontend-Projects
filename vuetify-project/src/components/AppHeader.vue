@@ -38,21 +38,17 @@
       </v-tab>
     </v-tabs>
 
-    <v-spacer />
-
     <!-- Action Buttons -->
     <div class="d-none d-md-flex align-center">
       <v-btn
         class="mr-2"
         color="primary"
-        size="small"
         variant="outlined"
       >
         Sign In
       </v-btn>
       <v-btn
         color="primary"
-        size="small"
         variant="elevated"
       >
         Get Started
