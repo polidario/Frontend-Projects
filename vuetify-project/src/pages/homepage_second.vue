@@ -66,7 +66,7 @@
 
           <v-row>
             <v-col cols="12" md="4" class="mb-8">
-              <v-card elevation="4" rounded>
+              <v-card rounded>
                 <v-card-item class="pa-8 text-center">
                   <v-avatar color="primary" size="72" class="mb-6">
                     <v-icon color="white" size="36">mdi-rocket-launch</v-icon>
@@ -80,7 +80,7 @@
             </v-col>
 
             <v-col cols="12" md="4" class="mb-8">
-              <v-card elevation="4" rounded>
+              <v-card rounded>
                 <v-card-item class="pa-8 text-center">
                   <v-avatar color="success" size="72" class="mb-6">
                     <v-icon color="white" size="36">mdi-shield-check</v-icon>
@@ -94,7 +94,7 @@
             </v-col>
 
             <v-col cols="12" md="4" class="mb-8">
-              <v-card elevation="4" rounded>
+              <v-card rounded>
                 <v-card-item class="pa-8 text-center">
                   <v-avatar color="info" size="72" class="mb-6">
                     <v-icon color="white" size="36">mdi-headphones</v-icon>

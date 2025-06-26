@@ -81,6 +81,8 @@
         <v-container class="py-16">
           <v-row>
             <v-col class="text-center mb-12" cols="12">
+              <v-btn color="primary" @click="toggleDarkMode" class="mb-5">Toggle</v-btn>
+
               <h2 class="text-h3 font-weight-bold mb-4">Why Choose Us</h2>
               <p class="text-h6 text-medium-emphasis">Discover the features that make us stand out</p>
             </v-col>
@@ -88,14 +90,14 @@
           
           <v-row>
             <v-col class="mb-8" cols="12" md="4">
-              <v-card class="h-100 pa-6" elevation="2">
+              <v-card color="black" class="h-100 pa-6 border-md border-current" elevation="2">
                 <v-card-item>
-                  <v-avatar class="mb-4" color="primary" size="64">
-                    <v-icon color="white" size="32">mdi-rocket-launch</v-icon>
+                  <v-avatar class="mb-4" color="white" size="64">
+                    <v-icon color="black" size="32">mdi-lightning-bolt</v-icon>
                   </v-avatar>
-                  <v-card-title class="text-h5 mb-2">Fast Performance</v-card-title>
+                  <v-card-title class="text-h5 mb-2">Lightning-fast</v-card-title>
                   <v-card-text class="text-body-1">
-                    Lightning-fast loading times and smooth interactions that keep your users engaged.
+                    Optimized infrastructure delivers exceptional performance across the globe.
                   </v-card-text>
                 </v-card-item>
               </v-card>
@@ -262,4 +264,11 @@
 
 <script setup>
   import AppHeader from '@/components/AppHeader.vue'
+import { useTheme } from 'vuetify'
+
+const theme = useTheme()
+
+function toggleDarkMode () {
+  theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark'
+}
 </script>

@@ -1,8 +1,8 @@
 <template>
   <v-app-bar
     class="px-4"
-    color="white"
     elevation="1"
+    scroll-behavior="elevate"
   >
     <!-- Logo/Brand -->
     <v-app-bar-nav-icon
@@ -20,6 +20,8 @@
       </v-icon>
       <span class="text-h6 font-weight-bold text-primary">OurPlatform</span>
     </v-app-bar-title>
+
+
 
     <!-- Desktop Navigation -->
     <v-tabs
@@ -111,8 +113,19 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useTheme } from 'vuetify'
+
+const theme = useTheme()
 
 const drawer = ref(false)
+const darkMode = ref(false)
+
+const switchLabel = darkMode ? 'light' : 'dark';
+
+function toggleTheme () {
+  theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark'
+  darkMode.value = !darkMode.value
+}
 
 const menuItems = [
   {
