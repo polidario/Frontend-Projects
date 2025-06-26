@@ -4,130 +4,117 @@ import Footer from './components/Footer.vue'
 </script>
 
 <template>
-  <div class="min-h-screen flex flex-col bg-gray-900">
+  <div class="min-h-screen flex flex-col bg-black">
     <Navbar />
     
     <!-- Hero Section -->
-    <section class="flex-1 bg-gray-900">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <section class="flex-1 bg-black">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
         <div class="text-center">
-          <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">
-            Simple & Beautiful
+          <h1 class="text-5xl md:text-8xl font-bold text-white mb-8 tracking-tight">
+            Create. Deploy. Succeed.
           </h1>
-          <p class="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-            We create stunning digital experiences that combine elegance with functionality.
-            Clean design meets powerful technology.
+          <p class="text-xl md:text-2xl text-white mb-12 max-w-3xl mx-auto font-light">
+            The modern platform for developers who want to focus on building amazing 
+            applications without worrying about infrastructure complexity.
           </p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button severity="primary" label="Get Started" size="large" class="px-8 py-3" />
-            <Button severity="secondary" label="Learn More" size="large" class="px-8 py-3" />
+            <Button label="Start Creating" size="large" class="px-12 py-4 bg-white text-black hover:bg-gray-100 font-semibold border-0" />
+            <Button label="View Documentation" outlined size="large" class="px-12 py-4 text-white border-white hover:bg-white hover:text-black font-semibold" />
           </div>
         </div>
       </div>
     </section>
 
-    <Divider class="border-gray-700" />
-
     <!-- Features Section -->
-    <section class="py-20 bg-gray-800">
+    <section class="py-32 bg-black border-t border-white border-opacity-20">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
-            Why Choose Us
+        <div class="text-center mb-24">
+          <h2 class="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tight">
+            Why developers choose us
           </h2>
-          <p class="text-lg text-gray-300 max-w-2xl mx-auto">
-            We focus on what matters most - delivering exceptional results with clean, efficient solutions.
+          <p class="text-xl text-white max-w-3xl mx-auto font-light">
+            Powerful tools and seamless workflows designed for modern development.
           </p>
         </div>
         
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <Card class="bg-gray-700 border border-gray-600 shadow-lg">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+          <Card class="bg-black border border-white border-opacity-20 shadow-none">
             <template #content>
-              <div class="text-center p-4">
-                <Avatar icon="pi pi-palette" class="mb-4 bg-blue-600 text-white" size="xlarge" />
-                <h3 class="text-xl font-semibold text-white mb-2">Design</h3>
-                <p class="text-gray-300">Beautiful, intuitive interfaces that users love to interact with.</p>
+              <div class="text-center p-8">
+                <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6">
+                  <i class="pi pi-bolt text-black text-2xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-4">Lightning Fast</h3>
+                <p class="text-white font-light">Optimized infrastructure delivers exceptional performance across the globe.</p>
               </div>
             </template>
           </Card>
           
-          <Card class="bg-gray-700 border border-gray-600 shadow-lg">
+          <Card class="bg-black border border-white border-opacity-20 shadow-none">
             <template #content>
-              <div class="text-center p-4">
-                <Avatar icon="pi pi-code" class="mb-4 bg-green-600 text-white" size="xlarge" />
-                <h3 class="text-xl font-semibold text-white mb-2">Development</h3>
-                <p class="text-gray-300">Clean, maintainable code built with modern technologies and best practices.</p>
+              <div class="text-center p-8">
+                <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6">
+                  <i class="pi pi-shield text-black text-2xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-4">Secure by Design</h3>
+                <p class="text-white font-light">Enterprise-grade security with automated SSL and DDoS protection.</p>
               </div>
             </template>
           </Card>
           
-          <Card class="bg-gray-700 border border-gray-600 shadow-lg">
+          <Card class="bg-black border border-white border-opacity-20 shadow-none">
             <template #content>
-              <div class="text-center p-4">
-                <Avatar icon="pi pi-users" class="mb-4 bg-purple-600 text-white" size="xlarge" />
-                <h3 class="text-xl font-semibold text-white mb-2">Support</h3>
-                <p class="text-gray-300">Dedicated support to ensure your project succeeds every step of the way.</p>
+              <div class="text-center p-8">
+                <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6">
+                  <i class="pi pi-cog text-black text-2xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-4">Zero Config</h3>
+                <p class="text-white font-light">Deploy instantly with intelligent defaults and automatic optimizations.</p>
               </div>
             </template>
           </Card>
         </div>
       </div>
     </section>
-
-    <Divider class="border-gray-700" />
 
     <!-- Stats Section -->
-    <section class="py-20 bg-gray-900">
+    <section class="py-32 bg-black border-t border-white border-opacity-20">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-          <Card class="bg-transparent border-none shadow-none">
-            <template #content>
-              <div class="p-6">
-                <div class="text-3xl font-bold text-white mb-2">100+</div>
-                <div class="text-gray-400">Projects Completed</div>
-              </div>
-            </template>
-          </Card>
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tight">
+            Numbers that speak
+          </h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+          <div class="p-8">
+            <div class="text-6xl font-bold text-white mb-4">500K+</div>
+            <div class="text-white font-light text-lg">Active Developers</div>
+          </div>
           
-          <Card class="bg-transparent border-none shadow-none">
-            <template #content>
-              <div class="p-6">
-                <div class="text-3xl font-bold text-white mb-2">50+</div>
-                <div class="text-gray-400">Happy Clients</div>
-              </div>
-            </template>
-          </Card>
+          <div class="p-8">
+            <div class="text-6xl font-bold text-white mb-4">5B+</div>
+            <div class="text-white font-light text-lg">API Requests Daily</div>
+          </div>
           
-          <Card class="bg-transparent border-none shadow-none">
-            <template #content>
-              <div class="p-6">
-                <div class="text-3xl font-bold text-white mb-2">99%</div>
-                <div class="text-gray-400">Success Rate</div>
-              </div>
-            </template>
-          </Card>
+          <div class="p-8">
+            <div class="text-6xl font-bold text-white mb-4">99.99%</div>
+            <div class="text-white font-light text-lg">Reliability</div>
+          </div>
         </div>
       </div>
     </section>
 
-    <Divider class="border-gray-700" />
-
     <!-- CTA Section -->
-    <section class="py-20 bg-gray-800">
+    <section class="py-32 bg-black border-t border-white border-opacity-20">
       <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-        <Card class="shadow-2xl border-0 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
-          <template #content>
-            <div class="p-8">
-              <h2 class="text-3xl md:text-4xl font-bold mb-4">
-                Ready to Get Started?
-              </h2>
-              <p class="text-lg mb-8 opacity-90">
-                Let's work together to bring your vision to life with clean, modern design.
-              </p>
-              <Button label="Contact Us" size="large" severity="secondary" class="px-8 py-4" />
-            </div>
-          </template>
-        </Card>
+        <h2 class="text-4xl md:text-6xl font-bold text-white mb-8 tracking-tight">
+          Join thousands of developers
+        </h2>
+        <p class="text-xl text-white mb-12 font-light max-w-2xl mx-auto">
+          Experience the future of web development with our cutting-edge platform.
+        </p>
+        <Button label="Get Started Free" size="large" class="px-12 py-4 bg-white text-black hover:bg-gray-100 font-semibold border-0" />
       </div>
     </section>
 
