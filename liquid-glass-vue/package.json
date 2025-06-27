@@ -1,0 +1,20 @@
+{
+  "name": "liquid-glass-vue",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "vue": "^3.5.17"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^6.0.0",
+    "interactjs": "^1.10.27",
+    "vite": "^7.0.0",
+    "vite-plugin-vue-devtools": "^7.7.7"
+  }
+}
