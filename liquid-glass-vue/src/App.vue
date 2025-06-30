@@ -7,7 +7,6 @@ import AppGlassmorphism from './components/AppGlassmorphism.vue';
 
 <template>
   <main>
-    <AppGlassmorphism></AppGlassmorphism>
     <AppCard>
       <img class="dock-icon" src="/images/chrome.png" />
       <img class="dock-icon" src="/images/netflix.png" />
