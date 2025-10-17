@@ -1,0 +1,43 @@
+/** style.css **/
+:root {
+    --root-theme: attr(data-theme);
+}
+
+@if style(--root-theme: "dark") {
+    background-color: black;
+    color: white;
+    display: block;
+}
+
+body {
+    color: red;
+}
+
+.card {
+    --theme: attr(data-theme);
+    --status: attr(data-status);
+    background-color: if(
+        style(--theme: "red"): red;
+        style(--theme: "blue"): #14305e;
+        style(--theme: "black"): #000000;
+        style(--theme: "whatever"): #7a3d00;
+        else: green;
+    );
+
+    color: if(
+        style(--theme: "red"): blue;
+        style(--theme: "blue"): red;
+        style(--theme: "black"): #ffffff;
+        style(--theme: "whatever"): #14305e;
+        else: white;
+    );
+
+    display: if(
+        style(--status: "ok"): block;
+        style(--status: "not-ok"): none;
+    );
+
+    font-size: xx-large;
+    padding: 2rem;
+    max-width: min-content;
+}
