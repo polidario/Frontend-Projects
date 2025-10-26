@@ -10,12 +10,15 @@ import {
   Pagination,
   SearchBox,
 } from 'react-instantsearch';
+import { Mic } from 'lucide-react';
+import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 
 import { Panel } from './Panel';
 
 import type { Hit } from 'instantsearch.js';
 
 import './App.css';
+import { VoiceSearch } from './components/VoiceSearch';
 
 const searchClient = algoliasearch(
   process.env.REACT_APP_ALGOLIA_APP_ID,
@@ -25,6 +28,7 @@ const searchClient = algoliasearch(
 const future = { preserveSharedStateOnUnmount: true };
 
 export function App() {
+  const { transcript } = useSpeechRecognition();
   return (
     <div>
       <header className="header">
@@ -49,7 +53,7 @@ export function App() {
             </div>
 
             <div className="search-panel__results">
-              <SearchBox placeholder="" className="searchbox search" />
+              <VoiceSearch />
               <Hits hitComponent={Hit} />
 
               <div className="pagination">

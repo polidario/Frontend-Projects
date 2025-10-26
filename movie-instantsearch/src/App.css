@@ -61,9 +61,16 @@ em {
   flex: 3;
 }
 
-.searchbox {
+.search-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: .5rem;
+  width: 100%;
   margin-bottom: 2rem;
 }
+
+.searchbox { width: 100%; }
 
 .pagination {
   margin: 2rem auto;
